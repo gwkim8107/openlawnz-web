@@ -1,3 +1,12 @@
+header {
+  background: url(../img/open-law-background.png) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: top;
+}
+
 .visuallyhidden {
   // hide from visual users, show for screen readers
   position: absolute !important;
@@ -28,12 +37,6 @@
   top: 0;
   left: 0;
   position: absolute;
-  background: url(../img/open-law-background.png) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-position: top;
 
   .nav-items {
     position: absolute;
@@ -46,6 +49,8 @@
     .nav-links {
       position: absolute;
       right: 8vw;
+      display: flex;
+      flex-direction: row;
 
       ul {
         display: flex;
@@ -69,6 +74,25 @@
           text-decoration: underline;
         }
       }
+
+      #login-button {
+        color: $openWhite;
+        padding: 0 2.3vw;
+        vertical-align: middle;
+        @include header-five;
+
+        a {
+          color: $openWhite;
+          line-height: 50px;
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+          user-select: none;
+        }
+      }
     }
   }
 }
@@ -78,6 +102,10 @@
 }
 
 @media (max-width: 890px) {
+  header {
+    padding-top: 50px;
+  }
+
   .nav-logo {
     position: absolute;
     left: 27px;
@@ -86,13 +114,33 @@
       width: 145px;
     }
   }
+
+  .nav-container {
+    .nav-items{
+      .nav-links {
+        margin-top: -50px;
+        height: 50px;
+
+        #login-button {
+          height: 80px;
+
+          a {
+            margin-left: 10px;
+            line-height: 80px;
+          }
+        }
+
+      }
+    }
+  }
+
   #menuToggle {
     display: block;
     position: absolute;
     top: 0;
     right: 0;
     width: 100vw;
-    height: 40px;
+    height: 50px;
     z-index: 200;
 
     -webkit-user-select: none;
@@ -157,9 +205,7 @@
   }
 
   #menuToggle input:checked ~ span:nth-last-child(3) {
-    position: fixed;
-    opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
+    transform: translate(-3px, 18px) rotate(-45deg);
   }
 
   #menuToggle input:checked ~ span:nth-last-child(2) {

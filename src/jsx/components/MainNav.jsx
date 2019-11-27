@@ -4,13 +4,69 @@ import { Link } from "react-router-dom";
 import Logo from "-!svg-react-loader?name=Logo!../../img/openlaw-logo.svg";
 import External from "-!svg-react-loader?name=External!../../img/external.svg";
 
-// login
-import { useAuth0 } from "../../js/react-auth0-spa";
+// Auth0: Authentication
+import Auth0Lock from "auth0-lock";
+import { environment } from "../../js/environment";
+
+const options = {
+	theme: {
+		logo: "https://www.openlaw.nz/assets/android-chrome-192x192.png",
+		primaryColor: "#2B6064"
+	},
+	languageDictionary: {
+		emailInputPlaceholder: "Email",
+		passwordInputPlaceholder: "Password",
+		title: "OpenLaw NZ"
+	}
+};
+
+const lock = new Auth0Lock(environment.auth0.clientId, environment.auth0.domain, options);
+var globalToken = sessionStorage.getItem("token");
+var globalProfile = sessionStorage.getItem("profile") && JSON.parse(sessionStorage.getItem("profile"));
 
 const MainNav = () => {
-	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+	const [loggedIn, setLoggedIn] = React.useState(false);
+	const [loginText, setLoginText] = React.useState("Login");
+	const [welcomMsg, setWelcomMsg] = React.useState("");
+
 	const [isNavOpen, setIsNavOpen] = React.useState(false);
 	const toggleNavState = () => setIsNavOpen(!isNavOpen);
+
+	const runAuth0Lock = e => {
+		e.preventDefault();
+		if (e) {
+			if(loggedIn){
+				setLoggedIn(false);
+				setWelcomMsg("");
+				setLoginText("Login");
+				sessionStorage.removeItem('token');
+				sessionStorage.removeItem('profile');
+			} else {
+				lock.show();
+			}
+		}
+	};
+
+	const onAuthenticated = () => {
+		lock.on("authenticated", authResult => {
+			lock.getUserInfo(authResult.accessToken, function(error, profile) {
+				if (error) {
+					// Handle error
+					return;
+				}
+				globalToken = authResult.accessToken;
+				globalProfile = profile;
+				sessionStorage.setItem("token", globalToken);
+				sessionStorage.setItem("profile", JSON.stringify(globalProfile));
+				console.log(JSON.stringify(globalProfile));
+				setLoggedIn(true);
+				setWelcomMsg("Hi, " + profile.given_name + "! ");
+				setLoginText("Logout");
+			});
+		});
+	};
+
+	if (!loggedIn) onAuthenticated();
 
 	return (
 		<header role="banner" className="nav-container">
@@ -48,17 +104,19 @@ const MainNav = () => {
 								</sup>
 							</a>
 						</li>
-						{/*
-							<li
-							onClick={() => {
-								toggleNavState();
-								return isAuthenticated ? logout() : loginWithRedirect({});
+					</ul>
+					<div className="menu-button" id="login-button">
+					  { welcomMsg }
+						<a
+							id="login-text"
+							href="#"
+							onClick={e => {
+								runAuth0Lock(e);
 							}}
 						>
-							<a href="#">{isAuthenticated ? "Logout" : "Log In"}</a>
-						</li>
-						*/}
-					</ul>
+							{ loginText }
+						</a>
+					</div>
 				</nav>
 			</div>
 		</header>
