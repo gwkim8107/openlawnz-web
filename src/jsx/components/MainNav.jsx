@@ -27,23 +27,19 @@ var globalProfile = sessionStorage.getItem("profile") && JSON.parse(sessionStora
 const MainNav = () => {
 	const [loggedIn, setLoggedIn] = React.useState(false);
 	const [loginText, setLoginText] = React.useState("Login");
-	const [welcomMsg, setWelcomMsg] = React.useState("");
 
 	const [isNavOpen, setIsNavOpen] = React.useState(false);
 	const toggleNavState = () => setIsNavOpen(!isNavOpen);
 
 	const runAuth0Lock = e => {
 		e.preventDefault();
-		if (e) {
-			if(loggedIn){
-				setLoggedIn(false);
-				setWelcomMsg("");
-				setLoginText("Login");
-				sessionStorage.removeItem('token');
-				sessionStorage.removeItem('profile');
-			} else {
-				lock.show();
-			}
+		if(loggedIn){
+			setLoggedIn(false);
+			setLoginText("Login");
+			sessionStorage.removeItem('token');
+			sessionStorage.removeItem('profile');
+		} else {
+			lock.show();
 		}
 	};
 
@@ -58,9 +54,7 @@ const MainNav = () => {
 				globalProfile = profile;
 				sessionStorage.setItem("token", globalToken);
 				sessionStorage.setItem("profile", JSON.stringify(globalProfile));
-				console.log(JSON.stringify(globalProfile));
 				setLoggedIn(true);
-				setWelcomMsg("Hi, " + profile.given_name + "! ");
 				setLoginText("Logout");
 			});
 		});
@@ -104,19 +98,18 @@ const MainNav = () => {
 								</sup>
 							</a>
 						</li>
+						<li onClick={toggleNavState}>
+							<a
+								id="login-text"
+								href="#"
+								onClick={e => {
+									runAuth0Lock(e);
+								}}
+							>
+								{ loginText }
+							</a>
+						</li>
 					</ul>
-					<div className="menu-button" id="login-button">
-					  { welcomMsg }
-						<a
-							id="login-text"
-							href="#"
-							onClick={e => {
-								runAuth0Lock(e);
-							}}
-						>
-							{ loginText }
-						</a>
-					</div>
 				</nav>
 			</div>
 		</header>
