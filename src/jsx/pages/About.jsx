@@ -25,6 +25,7 @@ import Infra from "../../img/about-us/openlaw-infrastructure.png";
 import Nicolas from "../../img/about-us/Nicolas-zhou.png";
 import Jins from "../../img/about-us/Jins_Mary_Job.png";
 import Dana from "../../img/about-us/dana-iti.png";
+import Jayden from "../../img/about-us/jayden-kim.png";
 
 class About extends Component {
 	render() {
@@ -229,7 +230,18 @@ class About extends Component {
 									</div>
 									<ReadMore
 										text="
-                    Dana is a Front End Developer. She is motivated by projects that help improve the lives of others. She previously worked on the Legislation as Code for the NZ Government and is thrilled to be able to contribute to OpenLaw NZ.
+										Dana is a Front End Developer. She is motivated by projects that help improve the lives of others. She previously worked on the Legislation as Code for the NZ Government and is thrilled to be able to contribute to OpenLaw NZ.
+									"
+									/>
+								</div>
+								<div className="card-item-small">
+									<div>
+										<img src={Jayden} alt="Gwangwoo Jayden Kim" />
+										<strong>Jayden Kim</strong>
+									</div>
+									<ReadMore
+										text="
+										Jayden has worked as a backend developer,but now he is trying to extend his ability to frontend area, especially using React JS. Apart from that he would like to support OpenLaw NZ project, and he even hopes his frontend skills to improve further.
 									"
 									/>
 								</div>
