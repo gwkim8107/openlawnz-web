@@ -24,7 +24,8 @@ class ApiService {
 			legislationToCases {
 				section,
 				legislation {
-					title
+					title,
+					link
 				}
 			},
 			pdf {
