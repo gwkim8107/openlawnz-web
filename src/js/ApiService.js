@@ -84,7 +84,7 @@ converted to string for usage in graphQL
 	paramsToString(params) {
 		let paramString = "";
 		if (params.constructor === Object && Object.keys(params).length) {
-			let tmp = [];
+			const tmp = [];
 			for (const key in params) {
 				let paramStr = params[key];
 				if (paramStr !== "") {

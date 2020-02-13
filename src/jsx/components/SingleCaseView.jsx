@@ -170,8 +170,25 @@ const SingleCaseView = props => {
 								<tbody className="">
 									{legislationToCases.map((obj, i) => (
 										<tr className="" key={`legislation-reference-${i}`}>
-											<a href={`http://legislation.govt.nz${obj.legislation.link}`} target='_blank'><td className="">{obj.legislation.title}</td>
-											<td className="">{obj.section}</td></a>
+											<td className="">
+												<a
+													href={`http://legislation.govt.nz/${obj.legislation.link}`}
+													style={{ width: "100%" }}
+												>
+													{obj.legislation.title}
+												</a>
+											</td>
+											<td className="">
+												<a
+													href={`http://www.legislation.govt.nz/act/results.aspx?search=ad_act__${obj.legislation.title
+														.toLowerCase()
+														.replace(/\s+/g, "+")}___${
+														obj.section
+													}_25_ac%40bn%40rn%40dn%40apub%40aloc%40apri%40apro%40aimp%40bgov%40bloc%40bpri%40bmem%40rpub%40rimp_ac%40ainf%40anif%40aaif%40aase%40arep%40bcur%40rinf%40rnif_a_aw_se&p=1`}
+												>
+													{obj.section}
+												</a>
+											</td>
 										</tr>
 									))}
 								</tbody>
