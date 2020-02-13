@@ -170,7 +170,7 @@ const SingleCaseView = props => {
 								<tbody className="">
 									{legislationToCases.map((obj, i) => (
 										<tr className="" key={`legislation-reference-${i}`}>
-											<a href={`http://legislation.govt.nz/${obj.legislation.link}`} target='_blank'><td className="">{obj.legislation.title}</td>
+											<a href={`http://legislation.govt.nz${obj.legislation.link}`} target='_blank'><td className="">{obj.legislation.title}</td>
 											<td className="">{obj.section}</td></a>
 										</tr>
 									))}
