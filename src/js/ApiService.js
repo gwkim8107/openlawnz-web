@@ -23,6 +23,7 @@ class ApiService {
 			},
 			legislationToCases {
 				section,
+				legislationId
 				legislation {
 					title,
 					link
