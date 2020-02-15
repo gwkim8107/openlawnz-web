@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
@@ -178,17 +180,21 @@ const SingleCaseView = props => {
 													{obj.legislation.title}
 												</a>
 											</td>
-											<td className="">
-												<a
-													href={`http://www.legislation.govt.nz/act/results.aspx?search=ad_act__${obj.legislation.title
-														.toLowerCase()
-														.replace(/\s+/g, "+")}___${
-														obj.section
-													}_25_ac%40bn%40rn%40dn%40apub%40aloc%40apri%40apro%40aimp%40bgov%40bloc%40bpri%40bmem%40rpub%40rimp_ac%40ainf%40anif%40aaif%40aase%40arep%40bcur%40rinf%40rnif_a_aw_se&p=1`}
-												>
-													{obj.section}
-												</a>
-											</td>
+											{
+												!obj.section.includes(")") && obj.section.slice(0, 2).replace(/()/g, "").length < 3 ? (
+													<td className="">
+														<a 
+															href={`http://www.legislation.govt.nz/act/results.aspx?search=ad_act__${obj.legislation.title.toLowerCase().replace(/\s+/g, "+")}___${obj.section.slice(0 , 2).replace(/()/g, "")}
+															}_25_ac%40bn%40rn%40dn%40apub%40aloc%40apri%40apro%40aimp%40bgov%40bloc%40bpri%40bmem%40rpub%40rimp_ac%40ainf%40anif%40aaif%40aase%40arep%40bcur%40rinf%40rnif_a_aw_se&p=1`} 
+															target='_blank'
+														>
+															{obj.section}
+														</a>
+													</td>
+												) : (
+													<td className="">{obj.section}</td>
+											)} {/* end of legislation loop */}
+											
 										</tr>
 									))}
 								</tbody>
