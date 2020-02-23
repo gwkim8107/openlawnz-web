@@ -13,15 +13,20 @@
     top: 50%;
     transform: translate(0%, -50%);
     display: flex;
-    float: right;
 
     p {
         padding-right: 34px;
     }
-    svg {
+
+    > div {
+      svg {
         width: 93px;
         height: 93px;
+      }
+      display: flex;
+      flex-direction: column;
     }
+    
   }
 
   .footer-contact-us{
