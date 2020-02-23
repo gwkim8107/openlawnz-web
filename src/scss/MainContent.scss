@@ -65,7 +65,7 @@
       pointer-events: auto;
     }
 
-    & > div {
+    &>div {
       width: 100%;
       max-width: 800px;
       position: absolute;
@@ -94,13 +94,12 @@
 
   .cards-list {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
 
     .card-item {
       margin-bottom: 20px;
       padding: 30px 25px;
-      background: #f6f6f6;
+      background: #F6F6F6;
 
       strong {
         margin: 10px 0;
@@ -119,11 +118,12 @@
     .card-item-small {
       margin-bottom: 15px;
       padding: 15px 15px;
+      background: #F6F6F6;
       display: flex;
       align-items: center;
-      justify-content: center;
 
       div {
+        flex-basis: 110px;
         text-align: center;
         margin-right: 20px;
         flex-shrink: 0;
@@ -154,6 +154,11 @@
       .readmore {
         width: 100%;
         display: inline-block;
+
+      }
+
+      .readmore-text {
+        cursor: pointer;
       }
 
       .readmore-text:hover {
@@ -186,18 +191,8 @@
       }
 
       .card-item-small {
-        flex-basis: 25%;
+        flex-basis: 49%;
       }
     }
   }
-}
-
-.a11y-button--unstyled {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
 }
